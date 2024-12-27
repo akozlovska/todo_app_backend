@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "rootDirs": ["src"],
-    "outDir": "dist",
+    "rootDir": "./src",
+    "outDir": "./dist",
     "lib": ["es2020"],
-    "target": "es2020",
-    "module": "esnext",
+    "target": "es2019",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "types": ["node"]
-  }
+    "types": ["jest", "node", "@types/jest"]
+  },
+  "include": ["src/**/*"]
 }

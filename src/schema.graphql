@@ -1,0 +1,60 @@
+scalar MaxLengthTitle
+scalar MaxLengthDescription
+scalar DateISO
+scalar PositiveInt
+
+type Task {
+  id: ID!
+  title: MaxLengthTitle!
+  description: MaxLengthDescription!
+  completed: Boolean
+  dueDate: DateISO!
+}
+
+type Query {
+  tasks(input: TasksInput): TasksResponse
+  task(id: ID!): Task,
+}
+
+type Mutation {
+  createTask(input: TaskInput!): Task
+  updateTask(id: ID!, input: TaskInput!): Task
+  deleteTask(id: ID!): String
+  completeAllTasks: [Task]
+}
+
+input TaskInput {
+  title: MaxLengthTitle!  
+  description: MaxLengthDescription!
+  completed: Boolean
+  dueDate: DateISO!
+}
+
+input TasksFilters {
+  completed: Boolean
+  from: DateISO
+  to: DateISO
+}
+
+input TasksPagination {
+  page: PositiveInt!
+  limit: PositiveInt!
+}
+
+input TasksInput {
+  query: TasksFilters
+  pagination: TasksPagination
+}
+
+type Metadata {
+  page: PositiveInt!
+  limit: PositiveInt!
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  total: Int!
+}
+
+type TasksResponse {
+  taskList: [Task]
+  metadata: Metadata
+}
